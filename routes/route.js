@@ -27,14 +27,15 @@ Route.prototype.init = function() {
     if(!controller || !action) {
       res.send('Require Params!');
     }
-    if(typeof requireFiles[controller][action] !== 'function') {
+    if(typeof requireFiles['controllers'][controller][action] !== 'function') {
       res.send('Not Found Views!'); 
     }
-    requireFiles[controller][action](req, res);
+
+    requireFiles['controllers'][controller][action](req, res);
   });
 
   //for models
-  ['get', 'post', 'put', 'patch', 'delete', 'del','all'].forEach(function(method) {
+  ['get', 'post', 'put', 'patch', 'delete', 'del', 'all'].forEach(function(method) {
     that.app[method]('/data/:controller/:action',function(req, res) {
       that.resolution(req, res);
     });
@@ -47,9 +48,7 @@ Route.prototype.resolution = function(req, res) {
   var controller = req.params['controller'];
   var action = req.params['action'];
   var options = {};
-  console.log('==============')
-  console.log(controller,action)
-  console.log('==============')
+  
 
   if(!this.isEmptyObject(req.body)) {
     options = req.body;

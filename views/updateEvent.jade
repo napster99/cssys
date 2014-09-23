@@ -1,0 +1,74 @@
+extends layout
+
+block content
+    div#breadcrumb
+      a(href="/", data-original-title="返回主页").tip-bottom
+        i.icon-home
+        span 主页
+      a(href="javascript:;").tip-bottom
+        i.icon-th-list
+        span 事件
+      a(href="/views/index/updateEvent").current 编辑事件
+    div.container-fluid
+      div.row-fluid
+        div.span12
+          div.widget-box
+            div.widget-title
+              span.icon
+                i.icon-edit
+              h5 编辑事件
+            div.widget-content.nopadding
+              form(action="#", method="get").form-horizontal
+                div.control-group
+                  label.control-label 输入人员
+                  div.controls
+                    input(type="text",disabled)
+                div.control-group
+                  label.control-label 事件分类
+                  div.controls
+                    select.span3
+                      option 主播工具问题
+                      option 用户卡顿问题
+                      option 用户黑屏问题
+                      option 其它
+                div.control-group
+                  label.control-label 事件描述
+                  div.controls
+                    input(type="text")
+                div.control-group
+                  label.control-label 解决方法
+                  div.controls
+                    textarea
+                div.control-group
+                  label.control-label QQ
+                  div.controls
+                    input(type="number")
+                div.control-group
+                  label.control-label 其它描述方式
+                  div.controls
+                    textarea
+                div.control-group
+                  label.control-label 常看的游戏直播
+                  div.controls
+                    select.span3
+                      option LOL
+                      option Dota2
+                      option 三国杀
+                      option CS
+                      option War3
+                      option Dota
+                div.control-group
+                  label.control-label 地区
+                  div.controls
+                    input(type="text")  
+                div.control-group
+                  label.control-label 所属网络
+                  div.controls
+                    input(type="text")  
+                div.control-group
+                  label.control-label 时间
+                  div.controls
+                    input(type="text",disabled)    
+                div.form-actions
+                  button(type="submit").btn.btn-primary 保存
+                  button(type="submit",style="margin-left:20px;").btn.btn-default 重置

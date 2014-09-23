@@ -1,5 +1,8 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    div#breadcrumb
+      a(href="/", data-original-title="Go to Home").tip-bottom
+        i.icon-home
+        span 主页
+      a(href="javascript:;").current 主页

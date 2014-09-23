@@ -1,0 +1,111 @@
+extends layout
+
+block content
+    div#breadcrumb
+      a(href="/", data-original-title="返回主页").tip-bottom
+        i.icon-home
+        span 主页
+      a(href="javascript:;").tip-bottom
+        i.icon-th-list
+        span 事件
+      a(href="/views/index/selectEvent").current 查询事件
+    div.container-fluid
+      div.row-fluid
+        div.span12
+          div.widget-box
+            div.widget-title
+              h5 事件查询条件
+            div.widget-content.nopadding
+              form(action="#", method="get").form-horizontal
+                div.row
+                  div.span5
+                      label.control-label 客服人员
+                      div.controls
+                        input(type="text")
+                  div.span5
+                      label.control-label 开始时间
+                      div.controls
+                        input(type="text")
+                div.row
+                  div.span5
+                      label.control-label 事件分类
+                      div.controls
+                        select
+                          option 主播工具问题
+                          option 用户卡顿问题
+                          option 用户黑屏问题
+                          option 其它
+                  div.span5
+                      label.control-label 结束时间
+                      div.controls
+                        input(type="text")
+                div.form-actions
+                  button(type="submit").btn.btn-primary 查询
+                  button(type="reset",style="margin-left:20px;").btn.btn-default 重置
+  
+
+
+          div.widget-box
+            div.widget-title
+              h5 事件查询表
+            div.widget-content.nopadding
+              div#DataTables_Table_0_wrapper.dataTables_wrapper
+                table.table.table-bordered.data-table.dataTable#DataTables_Table_0
+                  thead
+                    tr(role="row")
+                      th.ui-state-default(rowspan="1", colspan="1")
+                        div.DataTables_sort_wrapper AAAAA
+                          span.DataTables_sort_icon.css_right.ui-icon.ui-icon-carat-2-n-s
+                      th.ui-state-default(rowspan="1", colspan="1")
+                        div.DataTables_sort_wrapper BBBBBBB
+                          span.DataTables_sort_icon.css_right.ui-icon.ui-icon-carat-2-n-s
+                      th.ui-state-default(rowspan="1", colspan="1")
+                        div.DataTables_sort_wrapper CCCCCCC
+                          span.DataTables_sort_icon.css_right.ui-icon.ui-icon-carat-2-n-s
+                      th.ui-state-default(rowspan="1", colspan="1")
+                        div.DataTables_sort_wrapper DDDDDDD
+                          span.DataTables_sort_icon.css_right.ui-icon.ui-icon-carat-2-n-s
+                  tbody
+                    tr.gradeA.odd
+                      <td class="">Misc</td>
+                      <td class=" ">NetFront 3.1</td>
+                      <td class=" ">Embedded devices</td>
+                      <td class="center  sorting_1">-</td>
+                    tr.gradeA.even
+                      <td class="">Misc</td>
+                      <td class=" ">NetFront 3.1</td>
+                      <td class=" ">Embedded devices</td>
+                      <td class="center  sorting_1">-</td>
+                    tr.gradeA.odd
+                      <td class="">Misc</td>
+                      <td class=" ">NetFront 3.1</td>
+                      <td class=" ">Embedded devices</td>
+                      <td class="center  sorting_1">-</td>
+                    tr.grade. even
+                      <td class="">Misc</td>
+                      <td class=" ">NetFront 3.1</td>
+                      <td class=" ">Embedded devices</td>
+                      <td class="center  sorting_1">-</td>
+                    tr.gradeA.odd
+                      <td class="">Misc</td>
+                      <td class=" ">NetFront 3.1</td>
+                      <td class=" ">Embedded devices</td>
+                      <td class="center  sorting_1">-</td>
+                    tr.gradeA.even
+                      <td class="">Misc</td>
+                      <td class=" ">NetFront 3.1</td>
+                      <td class=" ">Embedded devices</td>
+                      <td class="center  sorting_1">-</td>
+
+                div.fg-toolbar.ui-toolbar.ui-widget-header.ui-corner-bl.ui-corner-br.ui-helper-clearfix
+                  div.dataTables_paginate.fg-buttonset.ui-buttonset.fg-buttonset-multi.ui-buttonset-multi.paging_full_numbers
+                    a.first.ui-corner-tl.ui-corner-bl.fg-button.ui-button.ui-state-default.ui-state-disabled First
+                    a.previous.fg-button.ui-button.ui-state-default.ui-state-disabled Previous
+                    span
+                      a.fg-button.ui-button.ui-state-default.ui-state-disabled 1
+                      a.fg-button.ui-button.ui-state-default 2
+                      a.fg-button.ui-button.ui-state-default 3
+                      a.fg-button.ui-button.ui-state-default 4
+                      a.fg-button.ui-button.ui-state-default 5
+                    a.next.fg-button.ui-button.ui-state-default Next
+                    a.last.ui-corner-tr.ui-corner-br.fg-button.ui-button.ui-state-default Last

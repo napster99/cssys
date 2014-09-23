@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    div#breadcrumb
+      a(href="/", data-original-title="Go to Home").tip-bottom
+        i.icon-home
+        span 主页
+      a(href="/views/index/settings").current 个人设置
+    div.container-fluid
+      div.row-fluid
+        div.span12
+          div.widget-box
+            div.widget-title
+              span.icon
+                i.icon-pencil
+              h5 个人设置
+            div.widget-content.nopadding
+              form(action="#", method="get").form-horizontal
+                div.control-group
+                  label.control-label 客服姓名
+                  div.controls
+                    input(type="text", required)
+                div.control-group
+                  label.control-label 账号
+                  div.controls
+                    input(type="text", required)  
+                div.control-group
+                  label.control-label 密码
+                  div.controls
+                    input(type="password", required)  
+                div.form-actions
+                  button(type="submit").btn.btn-primary 保存
+                  button(type="reset",style="margin-left:20px;").btn.btn-default 重置

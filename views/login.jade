@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/bootstrap-responsive.min.css')
+    link(rel='stylesheet', href='/css/fullcalendar.css')
+    link(rel='stylesheet', href='/css/unicorn.main.css')
+    link(rel='stylesheet', href='/css/unicorn.grey.css' class="skin-color" )
+    link(rel='stylesheet', href='/css/login.css')
+    script(src='/js/lib/excanvas.min.js')
+    script(src='/js/lib/jquery.min.js')
+    script(src='/js/lib/jquery.ui.custom.js')
+    script(src='/js/lib/bootstrap.min.js')
+    script(src='/js/lib/jquery.flot.min.js')
+    script(src='/js/lib/jquery.flot.resize.min.js')
+    script(src='/js/lib/jquery.peity.min.js')
+    script(src='/js/lib/fullcalendar.min.js')
+    script(src='/js/lib/unicorn.js')
+    script(src='/js/lib/unicorn.dashboard.js')
+    script(src='/js/common.js')
+    
+  body
+    div#header
+      h1 战旗客服后台系统
+    div.container
+      form(action="#", method="get").form-horizontal
+        div.control-group
+          div.input-prepend
+            span.add-on 账号
+            input.span2(type="text", required)
+        div.control-group
+          div.input-prepend
+            span.add-on 密码
+            input.span2(type="password", required)
+        div.btn-area
+            button(type="submit").btn.btn-primary 登录
+            button(type="reset",style="margin-left:20px;").btn.btn-default 重置
