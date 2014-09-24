@@ -5,8 +5,8 @@
  * 
  */
 var requireFiles = require('./requireFiles');
-var URLConfig = require('./URLConfig');
 var url = require('url');
+var db = require('../modules/db.js');
 
 function Route(app) {
   this.app = app || {};
@@ -23,7 +23,7 @@ Route.prototype.init = function() {
 
   this.app['get']('/views/:controller/:action', function(req, res, next) {
     var controller = req.params['controller'];
-    var action = req.params['action'];
+    var action = req.params['action']+'_view';
     if(!controller || !action) {
       res.send('Require Params!');
     }
@@ -42,33 +42,38 @@ Route.prototype.init = function() {
   });
 }
 
+Route.prototype.isEmptyObject = function(o) {
+  for(var n in o) {
+    return false;
+  } 
+  return true;
+}
 
 Route.prototype.resolution = function(req, res) {
   // var url = req.originalUrl;
   var controller = req.params['controller'];
-  var action = req.params['action'];
+  var action = req.params['action'] + '_data';
   var options = {};
   
-
   if(!this.isEmptyObject(req.body)) {
     options = req.body;
   }else{
     options = querystring.parse(url.parse(req.url).query);
   }
-
-  if(typeof requireFiles[controller][action] === 'function') {
+  
+  if(typeof requireFiles['controllers'][controller][action] === 'function') {
     // delete options['callback'];
-    requireFiles[controller][action](options,function(err,result) {
+    requireFiles['controllers'][controller][action](options,function(err,result) {
       
       if(!err) {
         res.json({
-          'code' : '1'
+          'code' : '0'
           ,'message' : 'success'
           ,'data' : result
         });
       } else {
         res.json({
-          'code' : '0'
+          'code' : '1'
           ,'message' : 'failure'
         });
       }

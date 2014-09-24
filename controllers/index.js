@@ -7,32 +7,31 @@
 
 
 //首页视图
-exports.index = function(req, res) {
+exports.index_view = function(req, res) {
   res.render('index',{'cur' : 'home'});
 }
 
 //增加事件
-exports.addEvent = function(req, res) {
+exports.addEvent_view = function(req, res) {
   res.render('addEvent',{'cur' : 'event'});
 }
 
 //编辑事件
-exports.updateEvent = function(req, res) {
+exports.updateEvent_view = function(req, res) {
   res.render('updateEvent',{'cur' : 'event'});
 }
 
 //查询事件
-exports.selectEvent = function(req, res) {
+exports.selectEvent_view = function(req, res) {
   res.render('selectEvent',{'cur' : 'event'});
 }
 
 //个人设置
-exports.settings = function(req, res) {
+exports.settings_view = function(req, res) {
   res.render('settings',{'cur' : 'settings'});
 }
 
 //登录页面
-exports.login = function(req, res) {
+exports.login_view = function(req, res) {
   res.render('login',{'cur' : 'login'});
 }
-
