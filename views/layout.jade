@@ -8,6 +8,7 @@ html
     link(rel='stylesheet', href='/css/fullcalendar.css')
     link(rel='stylesheet', href='/css/unicorn.main.css')
     link(rel='stylesheet', href='/css/unicorn.grey.css' class="skin-color" )
+    link(rel='stylesheet', href='/css/common.css')
     script(src='/js/lib/excanvas.min.js')
     script(src='/js/lib/jquery.min.js')
     script(src='/js/lib/jquery.ui.custom.js')
@@ -16,7 +17,7 @@ html
     // script(src='/js/lib/jquery.flot.resize.min.js')
     script(src='/js/lib/jquery.peity.min.js')
     script(src='/js/lib/fullcalendar.min.js')
-    // script(src='/js/lib/unicorn.js')
+    script(src='/js/lib/unicorn.js')
     // script(src='/js/lib/unicorn.dashboard.js')
     script(src='/js/common.js')
     
@@ -26,21 +27,21 @@ html
     div#user-nav.navbar.navbar-inverse
       ul.nav.btn-group
         li.btn.btn-inverse
-          a(href="/views/index/login",  title="")
+          a(href="javascript:;",  title="")
             i.icon.icon-user
-            span.text 张三
+            span.text#username= userName
         if(cur == 'settings')
           li.btn.btn-inverse.active
-            a(href="/views/index/settings", title="个人设置")
+            a(href="/views/user/settings", title="个人设置")
               i.icon.icon-cog
               span.text 个人设置
         else
           li.btn.btn-inverse
-            a(href="/views/index/settings", title="个人设置")
+            a(href="/views/user/settings", title="个人设置")
               i.icon.icon-cog
               span.text 个人设置
         li.btn.btn-inverse
-          a(href="javascript:;", title="")
+          a(href="/data/user/logout", title="")
             i.icon.icon-share-alt
             span.text 登出
     div#sidebar
@@ -65,9 +66,9 @@ html
               span.label 3
             ul
               li
-                a(href="/views/index/addEvent") 增加事件
-                a(href="/views/index/updateEvent") 编辑事件
-                a(href="/views/index/selectEvent") 查询事件
+                a(href="/views/event/addEvent") 增加事件
+                a(href="/views/event/updateEvent") 编辑事件
+                a(href="/views/event/selectEvent") 查询事件
         else 
           li.submenu
             a(href="javascript:;")
@@ -76,9 +77,9 @@ html
               span.label 3
             ul
               li
-                a(href="/views/index/addEvent") 增加事件
-                a(href="/views/index/updateEvent") 编辑事件
-                a(href="/views/index/selectEvent") 查询事件
+                a(href="/views/event/addEvent") 增加事件
+                a(href="/views/event/updateEvent") 编辑事件
+                a(href="/views/event/selectEvent") 查询事件
           
     div#content
       div#content-header

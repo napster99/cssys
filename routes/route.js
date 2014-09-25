@@ -4,6 +4,7 @@
  * 
  * 
  */
+var querystring = require('querystring');
 var requireFiles = require('./requireFiles');
 var url = require('url');
 var db = require('../modules/db.js');
@@ -16,11 +17,21 @@ function Route(app) {
 
 Route.prototype.init = function() {
   var that = this;
+
+  //session 过期,重新登录
+  this.app['get']('*',  function(req, res, next) {
+    if( (req.url === '/' || /^\/views/.test(req.url)) && !req.session.user) {
+      res.render('login',{'cur' : 'login'});
+    }else{
+      next();
+    }
+  });
+  
   //for views
   this.app['get']('/',  function(req, res, next) {
-    requireFiles['controllers']['index']['index'](req, res);
+    requireFiles['controllers']['index']['index_view'](req, res);
   });
-
+  
   this.app['get']('/views/:controller/:action', function(req, res, next) {
     var controller = req.params['controller'];
     var action = req.params['action']+'_view';
@@ -30,7 +41,8 @@ Route.prototype.init = function() {
     if(typeof requireFiles['controllers'][controller][action] !== 'function') {
       res.send('Not Found Views!'); 
     }
-
+    console.log(111111111)
+    console.log(requireFiles['controllers'][controller])
     requireFiles['controllers'][controller][action](req, res);
   });
 
@@ -60,6 +72,8 @@ Route.prototype.resolution = function(req, res) {
   }else{
     options = querystring.parse(url.parse(req.url).query);
   }
+  options['req'] = req;
+  options['res'] = res;
   
   if(typeof requireFiles['controllers'][controller][action] === 'function') {
     // delete options['callback'];

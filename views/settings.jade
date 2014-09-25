@@ -1,5 +1,6 @@
 extends layout
 
+
 block content
     div#breadcrumb
       a(href="/", data-original-title="Go to Home").tip-bottom
@@ -9,25 +10,40 @@ block content
     div.container-fluid
       div.row-fluid
         div.span12
+          div.alert.alert-success.hidden#settingsTip 
+            span 修改成功！
+            a.close(data-dismiss="alert") ×
           div.widget-box
             div.widget-title
               span.icon
                 i.icon-pencil
               h5 个人设置
             div.widget-content.nopadding
-              form(action="#", method="get").form-horizontal
+              form(action="javascript:;", method="post").form-horizontal#settingsForm
                 div.control-group
-                  label.control-label 客服姓名
+                  label.control-label 姓名
                   div.controls
-                    input(type="text", required)
+                    input(type="text", name="name" required, value= userName)
+                    span.help-inline This field is required.
                 div.control-group
                   label.control-label 账号
                   div.controls
-                    input(type="text", required)  
+                    input(type="text", name="account" required, value= userAccount)  
+                    span.help-inline This field is required.
                 div.control-group
                   label.control-label 密码
                   div.controls
-                    input(type="password", required)  
+                    input(type="password", name="password" required, value= userPwd)  
+                    span.help-inline This field is required.
+                div.control-group
+                  label.control-label 确认密码
+                  div.controls
+                    input(type="password", name="pwdAgain" required)  
+                    span.help-inline This field is required.
                 div.form-actions
                   button(type="submit").btn.btn-primary 保存
                   button(type="reset",style="margin-left:20px;").btn.btn-default 重置
+
+
+
+    script(src='/js/settings.js')

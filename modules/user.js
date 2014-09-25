@@ -47,21 +47,34 @@ UserModel.prototype.del = function() {
 
 }
 
-//修改
-UserModel.prototype.upd = function() {
-
+//修改 个人资料
+UserModel.prototype.upd = function(opts, callback) {
+  this.db.getConnection(function(err, connection) {
+    connection.query('update user set name = ? , account = ? , password = ? where id = ?',[opts['name'], opts['account'], opts['password'], opts['id']], function(err, rows) {
+      callback(err);
+    });
+  });
 }
 
 //查询
 UserModel.prototype.sel = function(opts, callback) {
   this.db.getConnection(function(err, connection) {
     var data = 'account="'+opts['account']+'"';
-    console.log(opts['account'])
-    connection.query('select * from user where account = ?', opts['account'], function(err, result) {  
-      console.log(result)
+    connection.query('select * from user where account = ? and password = ?', [opts['account'], opts['password']], function(err, result) {  
       callback(err, result);
     });  
   });
 }
+
+//验证用户名是否存在
+UserModel.prototype.accountCheck = function(opts, callback) {
+  this.db.getConnection(function(err, connection) {
+    connection.query('select * from user where account = ?', opts['account'],  function(err, result) {
+      callback(err, result);
+    })
+  });
+}
+
+
 
 module.exports = UserModel;

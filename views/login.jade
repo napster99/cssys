@@ -34,11 +34,12 @@ html
           div.input-prepend
             span.add-on 密码
             input.span2(type="password", required, name="password")
+        span#failTip(style="color:red;").hidden 登录失败！
         div.btn-area
             button(type="submit").btn.btn-primary 登录
             button(type="reset",style="margin-left:20px;").btn.btn-default 重置
       div#enterSys.hidden
         div.progress.progress-striped
-          div.bar(style="width:11%")
+          div.bar(style="width:0%")#processBar
         div
           center 初始化系统...
