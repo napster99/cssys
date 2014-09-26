@@ -27,57 +27,90 @@ function EventModel() {
 //   time  datetime  not null
 // )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+// create table config
+// (
+//   id int(4) auto_increment not null primary key, 
+//   value int(4) not null,
+//   name varchar(50),
+//   which varchar(50)
+// )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 //增加
 EventModel.prototype.add = function(opts, callback) {
-  this.db.getConnection(function(err, connection) {
+  // this.db.getConnection(function(err, connection) {
     var data = {
-        name : opts['name']
-      , account : opts['account']
-      , password : opts['password']
-      , role : opts['role'] || 1  //1 普通  2管理员
-      , joinTime : common.format(new Date, 'yyyy-MM-dd hh:mm:ss')
+        userName : opts['userName']
+      , type : opts['type']
+      , eventDesc : opts['eventDesc']
+      , solution : opts['solution']
+      , qq : opts['qq']
+      , otherDesc : opts['otherDesc']
+      , gameType : opts['gameType']
+      , address : opts['address'] 
+      , network : opts['network'] 
+      , time : common.format(new Date, 'yyyy-MM-dd hh:mm:ss')
     }
-    connection.query('insert into event SET ?', data, function(err, result) {  
+    this.db.query('insert into event SET ?', data, function(err, result) {  
       console.log(result);
       callback(err, result);
     });  
-  });
+  // });
 }
 
 //删除
 EventModel.prototype.del = function() {
-  
+
 }
 
-//修改 个人资料
+//修改 事件
 EventModel.prototype.upd = function(opts, callback) {
-  this.db.getConnection(function(err, connection) {
-    connection.query('update event set name = ? , account = ? , password = ? where id = ?',[opts['name'], opts['account'], opts['password'], opts['id']], function(err, rows) {
+  // this.db.getConnection(function(err, connection) {
+    this.db.query('update event set type = ? ,  eventDesc = ? , solution = ?, qq = ?, otherDesc = ? , gameType = ? , address = ?, network = ?  where id = ?',[opts['type'], opts['eventDesc'], opts['solution'], opts['qq'], opts['otherDesc'], opts['gameType'], opts['address'], opts['network'], opts['id']], function(err, rows) {
       callback(err);
     });
-  });
+  // });
 }
 
 //查询
 EventModel.prototype.sel = function(opts, callback) {
-  this.db.getConnection(function(err, connection) {
+  // this.db.getConnection(function(err, connection) {
     var data = 'account="'+opts['account']+'"';
-    connection.query('select * from event where account = ? and password = ?', [opts['account'], opts['password']], function(err, result) {  
+    this.db.query('select * from event where account = ? and password = ?', [opts['account'], opts['password']], function(err, result) {  
       callback(err, result);
     });  
-  });
+  // });
 }
 
 //验证用户名是否存在
 EventModel.prototype.accountCheck = function(opts, callback) {
-  this.db.getConnection(function(err, connection) {
-    connection.query('select * from event where account = ?', opts['account'],  function(err, result) {
+  // this.db.getConnection(function(err, connection) {
+    this.db.query('select * from event where account = ?', opts['account'],  function(err, result) {
       callback(err, result);
     })
-  });
+  // });
 }
 
+//根据Id查询
+EventModel.prototype.getEventById = function(opts, callback) {
+  // this.db.getConnection(function(err, connection) {
+    this.db.query('select * from event where id = ?', opts['id'], function(err, result) {
+      console.log(result)
+      callback(err, result);
+    });  
+  // });
+}
+
+
+//分页查询&条件  select * from event limit 5,2;
+EventModel.prototype.getEventsByPage = function(opts, callback) {
+  // this.db.getConnection(function(err, connection) {
+    this.db.query('select * from event order by time desc',  function(err, result) {
+      console.log(result)
+      callback(err, result);
+    });
+  // });
+}
 
 
 module.exports = EventModel;

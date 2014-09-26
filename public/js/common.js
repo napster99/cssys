@@ -6,6 +6,36 @@
  */
 
 
+ $(function() {
+  $('.datepicker').datepicker();
+ })
+
+var ConfigType = {
+   1001 : '主播工具问题'
+  ,1002 : '用户卡顿问题'
+  ,1003 : '用户黑屏问题'
+  ,1004 : '其他'
+}
+
+var ConfigGameType = {
+   10 : 'LOL'
+  ,11 : 'Dota2'
+  ,12 : 'CS'
+  ,13 : '三国杀' 
+  ,14 : 'war3' 
+  ,15 : 'Dota' 
+}
+
+
+var networkType = {
+   1 : '电信'
+  ,2 : '联通'
+  ,3 : '移动'
+  ,4 : '铁通'
+  ,5 : '其他'
+}
+
+
 function getParam(B, E) {
   var params = null;
   if (typeof E == "undefined") {

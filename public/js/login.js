@@ -14,7 +14,7 @@ $(function() {
     },
 
     view : function() {
-      
+
     },
 
     listen : function() {
@@ -32,7 +32,6 @@ $(function() {
       $('button[type=reset]').on('click', function() {
         $('#failTip').addClass('hidden');
       });
-
 
     },
 

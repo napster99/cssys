@@ -41,8 +41,6 @@ Route.prototype.init = function() {
     if(typeof requireFiles['controllers'][controller][action] !== 'function') {
       res.send('Not Found Views!'); 
     }
-    console.log(111111111)
-    console.log(requireFiles['controllers'][controller])
     requireFiles['controllers'][controller][action](req, res);
   });
 

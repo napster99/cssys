@@ -8,6 +8,8 @@
 var db = require('./db');
 var common = require('../routes/common');
 
+var connection;
+
 function UserModel() {
   this.db = db;
 }
@@ -27,7 +29,7 @@ function UserModel() {
 
 //增加
 UserModel.prototype.add = function(opts, callback) {
-  this.db.getConnection(function(err, connection) {
+  // this.db.getConnection(function(err, connection) {
     var data = {
         name : opts['name']
       , account : opts['account']
@@ -35,11 +37,11 @@ UserModel.prototype.add = function(opts, callback) {
       , role : opts['role'] || 1  //1 普通  2管理员
       , joinTime : common.format(new Date, 'yyyy-MM-dd hh:mm:ss')
     }
-    connection.query('insert into user SET ?', data, function(err, result) {  
+    this.db.query('insert into user SET ?', data, function(err, result) {  
       console.log(result);
       callback(err, result);
     });  
-  });
+  // });
 }
 
 //删除
@@ -49,30 +51,32 @@ UserModel.prototype.del = function() {
 
 //修改 个人资料
 UserModel.prototype.upd = function(opts, callback) {
-  this.db.getConnection(function(err, connection) {
-    connection.query('update user set name = ? , account = ? , password = ? where id = ?',[opts['name'], opts['account'], opts['password'], opts['id']], function(err, rows) {
+  // this.db.getConnection(function(err, connection) {
+    this.db.query('update user set name = ? , account = ? , password = ? where id = ?',[opts['name'], opts['account'], opts['password'], opts['id']], function(err, rows) {
       callback(err);
     });
-  });
+  // });
 }
 
 //查询
 UserModel.prototype.sel = function(opts, callback) {
-  this.db.getConnection(function(err, connection) {
-    var data = 'account="'+opts['account']+'"';
-    connection.query('select * from user where account = ? and password = ?', [opts['account'], opts['password']], function(err, result) {  
+  // this.db.getConnection(function(err, connection) {
+    console.log([opts['account'], opts['password']])
+    this.db.query('select * from user where account = ? and password = ?', [opts['account'], opts['password']], function(err, result) {  
+      console.log('search back')
+      console.log(result)
       callback(err, result);
     });  
-  });
+  // });
 }
 
 //验证用户名是否存在
 UserModel.prototype.accountCheck = function(opts, callback) {
-  this.db.getConnection(function(err, connection) {
-    connection.query('select * from user where account = ?', opts['account'],  function(err, result) {
+  // this.db.getConnection(function(err, connection) {
+    this.db.query('select * from user where account = ?', opts['account'],  function(err, result) {
       callback(err, result);
     })
-  });
+  // });
 }
 
 

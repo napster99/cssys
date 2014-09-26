@@ -12,63 +12,63 @@ block content
     div.container-fluid
       div.row-fluid
         div.span12
+          div.alert.alert-success.hidden#updateEventTip 
+            span 编辑成功！
+            a.close(data-dismiss="alert") ×
           div.widget-box
             div.widget-title
               span.icon
                 i.icon-edit
               h5 编辑事件
             div.widget-content.nopadding
-              form(action="#", method="get").form-horizontal
+              form(action="javascript:;", method="get").form-horizontal#updateEventForm
                 div.control-group
                   label.control-label 输入人员
                   div.controls
-                    input(type="text",disabled)
+                    input(type="text", disabled, value= userName, name="userName")
                 div.control-group
                   label.control-label 事件分类
                   div.controls
-                    select.span3
-                      option 主播工具问题
-                      option 用户卡顿问题
-                      option 用户黑屏问题
-                      option 其它
+                    select.span3#type
                 div.control-group
                   label.control-label 事件描述
                   div.controls
-                    input(type="text")
+                    input(type="text", name="eventDesc", required)
                 div.control-group
                   label.control-label 解决方法
                   div.controls
-                    textarea
+                    textarea#solution
                 div.control-group
                   label.control-label QQ
                   div.controls
-                    input(type="number")
+                    input(type="number",name="qq")
                 div.control-group
                   label.control-label 其它描述方式
                   div.controls
-                    textarea
+                    textarea#otherDesc
                 div.control-group
                   label.control-label 常看的游戏直播
                   div.controls
-                    select.span3
-                      option LOL
-                      option Dota2
-                      option 三国杀
-                      option CS
-                      option War3
-                      option Dota
+                    select.span3#gameType
                 div.control-group
                   label.control-label 地区
                   div.controls
-                    input(type="text")  
+                    input(type="text",name="address")  
                 div.control-group
                   label.control-label 所属网络
                   div.controls
-                    input(type="text")  
-                div.control-group
-                  label.control-label 时间
-                  div.controls
-                    input(type="text",disabled)    
+                    input(type="radio", value="1", name="network")#foo
+                    label(for="foo", style="display:inline; margin: 0 20px 0 5px; vertical-align:middle;") 电信
+                    input(type="radio", value="2", name="network")#foo2
+                    label(for="foo2", style="display:inline; margin: 0 20px 0 5px; vertical-align:middle;") 联通
+                    input(type="radio", value="3", name="network")#foo3
+                    label(for="foo3", style="display:inline; margin: 0 20px 0 5px; vertical-align:middle;") 移动
+                    input(type="radio", value="4", name="network")#foo4
+                    label(for="foo4", style="display:inline; margin: 0 20px 0 5px; vertical-align:middle;") 铁通
+                    input(type="radio", value="5", name="network")#foo5
+                    label(for="foo5", style="display:inline; margin: 0 20px 0 5px; vertical-align:middle;") 其他
+                    input(type="text", name="otherNet", style="width:auto;").hidden 
                 div.form-actions
                   button(type="submit").btn.btn-primary 保存
-                  button(type="submit",style="margin-left:20px;").btn.btn-default 重置
+                  button(type="reset",style="margin-left:20px;").btn.btn-default 重置
+    script(src='/js/updateEvent.js')

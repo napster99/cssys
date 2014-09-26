@@ -6,6 +6,7 @@
  */
 var mysql = require('mysql');
 
+
 /* 创建MySQL连接对象 */
 // var connection = mysql.createConnection({
 //   host : 'localhost',
@@ -15,16 +16,16 @@ var mysql = require('mysql');
 //   database : 'cssys'
 // });
 
-var pool  = mysql.createPool({  
-  host     : 'localhost',
-  port     : 3307,
-  user     : 'root',
-  password : 'root',
-  database : 'cssys',
-  debug    : false
-});
+// var pool  = mysql.createPool({  
+//   host     : 'localhost',
+//   port     : 3307,
+//   user     : 'root',
+//   password : 'root',
+//   database : 'cssys',
+//   debug    : false
+// });
 
-module.exports = pool;
+// module.exports = pool;
 
 // connection.connect(function(err) {
 //   if(err) {
@@ -33,3 +34,16 @@ module.exports = pool;
 //     console.log('mysql connection success!');
 //   }
 // });
+
+
+var conn = mysql.createConnection({
+  host:'localhost',
+  user:'root',
+  database:'cssys',
+  password:'root',
+  port:3307
+});
+
+conn.connect();
+
+module.exports = conn;

@@ -1,6 +1,6 @@
 /**
  *
- * @desc 增加事件
+ * @desc 编辑事件
  * 
  * 
  */
@@ -16,19 +16,20 @@ $(function() {
 
     view : function() {
       this.getTypeConfig();
+      this.getEventById(getParam('eventId'));
     },
 
     listen : function() {
       var self = this;
-      $('#addEventForm').on('submit',  function() {
-
+      $('#updateEventForm').on('submit',  function() {
         var network = $('input[name=network]:checked').val();
         if(network == '5') {
           network = $('input[name=otherNet]').val();
         }
-        
+
         var param = {
-            userName : $('input[name=userName]').val()
+            id : getParam('eventId')
+          ,  userName : $('input[name=userName]').val()
           , eventDesc : $('input[name=eventDesc]').val()
           , solution : $('#solution').val()
           , type : $('#type').val()
@@ -39,11 +40,11 @@ $(function() {
           , network : network
         }
         
-        $.ajax('/data/event/addEvent',{'type':'POST','data' :param}).done(function(data) {
+        $.ajax('/data/event/updateEvent',{'type':'POST','data' :param}).done(function(data) {
           if(data['code'] == '0') {
-            $('#addEventTip').find('span').text('增加成功！').end().removeClass('hidden').addClass('alert-success');
+            $('#updateEventTip').find('span').text('编辑成功！').end().removeClass('hidden').addClass('alert-success');
           }else{
-            $('#addEventTip').find('span').text('增加失败，请稍后重试！').end().removeClass('hidden').addClass('alert-error');
+            $('#updateEventTip').find('span').text('编辑失败，请稍后重试！').end().removeClass('hidden').addClass('alert-error');
           }
           setTimeout(function() {
             window.location.href = window.location.href;
@@ -52,7 +53,7 @@ $(function() {
 
         return false;
       });
-
+      
       $('input[name=network]').on('click',  function() {
         $('input[name=otherNet]').addClass('hidden').removeAttr('required');
       });
@@ -64,7 +65,8 @@ $(function() {
     },
 
     getTypeConfig : function() {
-      $.ajax('/data/config/getType',{'type':'GET'}).done(function(data) {
+      $.ajax('/data/config/getType',{'type':'GET','async' : false}).done(function(data) {
+        console.log('getTypeConfig')
         if(data['code'] == '0') {
           var type = {}, gameType = {}, data = data['data'];
           for(var i=0,len=data.length; i<len; i++) {
@@ -84,6 +86,29 @@ $(function() {
             sHtmlGameType += '<option value="'+val['value']+'">'+val['name']+'</option>'
           });
           $('#gameType').html(sHtmlGameType);
+        }
+      });
+    },
+
+
+    getEventById : function(id) {
+      $.ajax('/data/event/getEventById',{'type':'GET','data' : {'id' : id}}).done(function(data) {
+        if(data['code'] == '0') {
+          $('input[name=eventDesc]').val(data['data'][0]['eventDesc']);
+          $('#solution').val(data['data'][0]['solution']);
+          $('#type').find('option[value='+data['data'][0]['type']+']')[0].selected = true;
+          $('input[name=qq]').val(data['data'][0]['qq']);
+          $('#otherDesc').val(data['data'][0]['otherDesc']);
+          $('#gameType').find('option[value='+data['data'][0]['gameType']+']')[0].selected = true;
+          $('input[name=address]').val(data['data'][0]['address']);
+          
+          var network = networkType[data['data'][0]['network']];
+          if(network) {
+            $('input[name=network][value='+data['data'][0]['network']+']')[0].checked = true;
+          }else{
+            $('input[name=network][value=5]')[0].checked = true;
+            $('input[name=otherNet]').val(data['data'][0]['network']).removeClass('hidden');
+          }
         }
       });
     }

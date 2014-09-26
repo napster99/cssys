@@ -16,35 +16,42 @@ block content
             div.widget-title
               h5 事件查询条件
             div.widget-content.nopadding
-              form(action="#", method="get").form-horizontal
+              form(action="javascript:;", method="get").form-horizontal#selectEventForm
                 div.row
                   div.span5
                       label.control-label 客服人员
-                      div.controls
-                        input(type="text")
+                      div.controls(style="width:500px;")
+                        input(type="text", name="userName", style="width:205px;", value="不限")
+                        button(type="button", style="margin-left:10px;", name="all").btn.btn-default 不限
                   div.span5
                       label.control-label 开始时间
-                      div.controls
-                        input(type="text")
+                      div.controls(style="width:500px;")
+                        input(type="text", name="startTime", data-date-format="yyyy-mm-dd", style="width:205px;", value="不限").datepicker
+                        button(type="button", style="margin-left:10px;", name="all").btn.btn-default 不限
                 div.row
                   div.span5
                       label.control-label 事件分类
                       div.controls
-                        select
-                          option 主播工具问题
-                          option 用户卡顿问题
-                          option 用户黑屏问题
-                          option 其它
+                        select#type
                   div.span5
                       label.control-label 结束时间
-                      div.controls
-                        input(type="text")
+                      div.controls(style="width:500px;")
+                        input(type="text", name="endTime", data-date-format="yyyy-mm-dd", style="width:205px;", value="不限").datepicker
+                        button(type="button", style="margin-left:10px;", name="all").btn.btn-default 不限
+                div.row
+                  div.span5
+                      label.control-label 游戏直播
+                      div.controls(style="width:500px;")
+                        select#gameType
+                  div.span5
+                      label.control-label QQ
+                      div.controls(style="width:500px;")
+                        input(type="text", name="qq", style="width:205px;", value="不限")
+                        button(type="button", style="margin-left:10px;", name="all").btn.btn-default 不限
                 div.form-actions
                   button(type="submit").btn.btn-primary 查询
                   button(type="reset",style="margin-left:20px;").btn.btn-default 重置
-  
-
-
+          
           div.widget-box
             div.widget-title
               h5 事件查询表
@@ -54,50 +61,41 @@ block content
                   thead
                     tr(role="row")
                       th.ui-state-default(rowspan="1", colspan="1")
-                        div.DataTables_sort_wrapper AAAAA
+                        div.DataTables_sort_wrapper 输入人员
                           span.DataTables_sort_icon.css_right.ui-icon.ui-icon-carat-2-n-s
                       th.ui-state-default(rowspan="1", colspan="1")
-                        div.DataTables_sort_wrapper BBBBBBB
+                        div.DataTables_sort_wrapper 事件分类
                           span.DataTables_sort_icon.css_right.ui-icon.ui-icon-carat-2-n-s
                       th.ui-state-default(rowspan="1", colspan="1")
-                        div.DataTables_sort_wrapper CCCCCCC
+                        div.DataTables_sort_wrapper 事件描述
                           span.DataTables_sort_icon.css_right.ui-icon.ui-icon-carat-2-n-s
                       th.ui-state-default(rowspan="1", colspan="1")
-                        div.DataTables_sort_wrapper DDDDDDD
+                        div.DataTables_sort_wrapper 解决方法
                           span.DataTables_sort_icon.css_right.ui-icon.ui-icon-carat-2-n-s
-                  tbody
-                    tr.gradeA.odd
-                      <td class="">Misc</td>
-                      <td class=" ">NetFront 3.1</td>
-                      <td class=" ">Embedded devices</td>
-                      <td class="center  sorting_1">-</td>
-                    tr.gradeA.even
-                      <td class="">Misc</td>
-                      <td class=" ">NetFront 3.1</td>
-                      <td class=" ">Embedded devices</td>
-                      <td class="center  sorting_1">-</td>
-                    tr.gradeA.odd
-                      <td class="">Misc</td>
-                      <td class=" ">NetFront 3.1</td>
-                      <td class=" ">Embedded devices</td>
-                      <td class="center  sorting_1">-</td>
-                    tr.grade. even
-                      <td class="">Misc</td>
-                      <td class=" ">NetFront 3.1</td>
-                      <td class=" ">Embedded devices</td>
-                      <td class="center  sorting_1">-</td>
-                    tr.gradeA.odd
-                      <td class="">Misc</td>
-                      <td class=" ">NetFront 3.1</td>
-                      <td class=" ">Embedded devices</td>
-                      <td class="center  sorting_1">-</td>
-                    tr.gradeA.even
-                      <td class="">Misc</td>
-                      <td class=" ">NetFront 3.1</td>
-                      <td class=" ">Embedded devices</td>
-                      <td class="center  sorting_1">-</td>
+                      th.ui-state-default(rowspan="1", colspan="1")
+                        div.DataTables_sort_wrapper QQ
+                          span.DataTables_sort_icon.css_right.ui-icon.ui-icon-carat-2-n-s
+                      th.ui-state-default(rowspan="1", colspan="1")
+                        div.DataTables_sort_wrapper 其它描述方式
+                          span.DataTables_sort_icon.css_right.ui-icon.ui-icon-carat-2-n-s
+                      th.ui-state-default(rowspan="1", colspan="1")
+                        div.DataTables_sort_wrapper 常看的游戏直播
+                          span.DataTables_sort_icon.css_right.ui-icon.ui-icon-carat-2-n-s
+                      th.ui-state-default(rowspan="1", colspan="1")
+                        div.DataTables_sort_wrapper 地区
+                          span.DataTables_sort_icon.css_right.ui-icon.ui-icon-carat-2-n-s
+                      th.ui-state-default(rowspan="1", colspan="1")
+                        div.DataTables_sort_wrapper 所属网络
+                          span.DataTables_sort_icon.css_right.ui-icon.ui-icon-carat-2-n-s
+                      th.ui-state-default(rowspan="1", colspan="1")
+                        div.DataTables_sort_wrapper 提交时间
+                          span.DataTables_sort_icon.css_right.ui-icon.ui-icon-carat-2-n-s
+                      th.ui-state-default(rowspan="1", colspan="1")
+                        div.DataTables_sort_wrapper 操作
+                          span.DataTables_sort_icon.css_right.ui-icon.ui-icon-carat-2-n-s
+                  tbody#container
 
-                div.fg-toolbar.ui-toolbar.ui-widget-header.ui-corner-bl.ui-corner-br.ui-helper-clearfix
+                div.fg-toolbar.ui-toolbar.ui-widget-header.ui-corner-bl.ui-corner-br.ui-helper-clearfix#pagination 
                   div.dataTables_paginate.fg-buttonset.ui-buttonset.fg-buttonset-multi.ui-buttonset-multi.paging_full_numbers
                     a.first.ui-corner-tl.ui-corner-bl.fg-button.ui-button.ui-state-default.ui-state-disabled First
                     a.previous.fg-button.ui-button.ui-state-default.ui-state-disabled Previous
@@ -109,3 +107,4 @@ block content
                       a.fg-button.ui-button.ui-state-default 5
                     a.next.fg-button.ui-button.ui-state-default Next
                     a.last.ui-corner-tr.ui-corner-br.fg-button.ui-button.ui-state-default Last
+    script(src='/js/selectEvent.js')

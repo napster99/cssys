@@ -56,8 +56,6 @@ exports.update_data = function(opts, callback) {
       }else{
         opts['res'].render('login',{'cur' : 'login'});
       }
-      console.log('同时更新session')
-      console.log(opts['req']['session']['user'])
       callback(false,{});
     }
   });
@@ -70,6 +68,7 @@ exports.login_view = function(req, res) {
 
 //提交登录
 exports.login_data = function(opts, callback) {
+  console.log('提交登录' )
   userModuleObj.sel(opts, function(err, result) {
     if(err) {
       callback(err,{});
@@ -86,7 +85,7 @@ exports.login_data = function(opts, callback) {
 
 }
 
-//提交登录
+//提交登出
 exports.logout_data = function(opts, callback) {
   delete opts['req']['session'].user;
   opts['res'].render('login',{'cur' : 'login'});

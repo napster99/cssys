@@ -7,6 +7,8 @@ html
     link(rel='stylesheet', href='/css/bootstrap-responsive.min.css')
     link(rel='stylesheet', href='/css/fullcalendar.css')
     link(rel='stylesheet', href='/css/unicorn.main.css')
+    link(rel='stylesheet', href='/css/datepicker.css')
+
     link(rel='stylesheet', href='/css/unicorn.grey.css' class="skin-color" )
     link(rel='stylesheet', href='/css/common.css')
     script(src='/js/lib/excanvas.min.js')
@@ -19,7 +21,10 @@ html
     script(src='/js/lib/fullcalendar.min.js')
     script(src='/js/lib/unicorn.js')
     // script(src='/js/lib/unicorn.dashboard.js')
+    script(src='/js/lib/bootstrap-datepicker.js')
+
     script(src='/js/common.js')
+    script(src='/js/lib/pagination.js')
     
   body
     div#header
@@ -63,22 +68,20 @@ html
             a(href="javascript:;")
               i.icon.icon-th-list
               span 事件
-              span.label 3
+              span.label 2
             ul
               li
                 a(href="/views/event/addEvent") 增加事件
-                a(href="/views/event/updateEvent") 编辑事件
                 a(href="/views/event/selectEvent") 查询事件
         else 
           li.submenu
             a(href="javascript:;")
               i.icon.icon-th-list
               span 事件
-              span.label 3
+              span.label 2
             ul
               li
                 a(href="/views/event/addEvent") 增加事件
-                a(href="/views/event/updateEvent") 编辑事件
                 a(href="/views/event/selectEvent") 查询事件
           
     div#content
