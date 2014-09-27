@@ -11,7 +11,9 @@ $(function() {
     , perCount = 10;
 
   var param = {};
-
+  var ui = {
+    $myPage : $('#myPage')
+  }
   var oPage = {
 
     init : function() {
@@ -27,6 +29,8 @@ $(function() {
     listen : function() {
       var self = this;
       $('#selectEventForm').on('submit',  function() {
+        ui.$myPage.data('pagination',null);
+
         var param = {
             userName : $('input[name=userName]').val()
           , type : $('#type').val()
@@ -75,8 +79,8 @@ $(function() {
     getEventsByPage : function() {
       var condition = {}, self = this;
       var param = {
-        'start' : (curPage - 1)*10,
-        'count' : 10
+        'start' : (curPage - 1)*perCount,
+        'count' : perCount
       }
 
       //客服人员
@@ -113,7 +117,19 @@ $(function() {
 
       $.ajax('/data/event/getEventsByPage',{'type':'GET','data' : param}).done(function(data) {
         if(data['code'] == '0') {
+          console.log(data)
           self.renderData(data['data']);
+          if(!ui.$myPage.data('pagination')) {
+            console.log('init page')
+            ui.$myPage.pagination({
+              onPageChange : function(cp) {
+                curPage = cp;
+                self.getEventsByPage.call(self);
+              },
+              count : Math.ceil(data['data'][0]['count']/perCount),
+              prePage : 5
+            })
+          }
         }
       });
     },

@@ -31,7 +31,7 @@
 
   , bindEvent: function(){
       var self = this;
-      this.$element.on('click', 'li', function() {
+      this.$element.on('click', 'a', function() {
         var index = $(this).attr('index');
         switch(index){
           case 'index':
@@ -76,34 +76,34 @@
           break;
         }
       }
-      var html = '<li index="index" ><a href="javascript:;" >首页</a></li>';
+      var html = '<a index="index" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default" href="javascript:;" >首页</a>';
       
       if(i != 1){
-        html += '<li index="prev"><a href="javascript:;" >&lt;</a></li>';
-        html += '<li index="moreprev"><a href="javascript:;" >'+this.options.ellipseText+'</a></li>';
+        html += '<a index="prev" class="previous fg-button ui-button ui-state-default ui-state-disabled" href="javascript:;" >&lt;</a>';
+        html += '<a class="previous fg-button ui-button ui-state-default ui-state-disabled" index="moreprev" href="javascript:;" >'+this.options.ellipseText+'</a>';
       } 
       if(this.options.count%this.options.prePage != 0) {       
         if(i == n) {  //最后一个阶段
           for(var k=(i-1)*this.options.prePage+1; k<=this.options.count; k++ ) {
-            html += '<li index="'+k+'"><a href="javascript:;" >'+k+'</a></li>';
+            html += '<a index="'+k+'" class="fg-button ui-button ui-state-default" href="javascript:;" >'+k+'</a>';
           }
         }else{
           for(var k=(i-1)*this.options.prePage+1; k<this.options.prePage*i+1; k++ ) {
-            html += '<li index="'+k+'" ><a href="javascript:;" >'+k+'</a></li>';
+            html += '<a index="'+k+'" class="fg-button ui-button ui-state-default" href="javascript:;" >'+k+'</a>';
           }
         }   
       }else{      
         for(var k=(i-1)*this.options.prePage+1; k<this.options.prePage*i+1; k++ ) {
-          html += '<li index="'+k+'" ><a href="javascript:;" >'+k+'</a></li>';
+          html += '<a index="'+k+'" class="fg-button ui-button ui-state-default" href="javascript:;" >'+k+'</a>';
         }
       }
       if(i != n && n>1){
-        html += '<li index="morenext" ><a href="javascript:;" >'+this.options.ellipseText+'</a></li>';
-        html += '<li index="next" ><a href="javascript:;" >&gt;</a></li>';
+        html += '<a index="morenext" class="fg-button ui-button ui-state-default" href="javascript:;" >'+this.options.ellipseText+'</a>';
+        html += '<a index="next" class="fg-button ui-button ui-state-default" href="javascript:;" >&gt;</a>';
       }
-      html += '<li index="last" ><a href="javascript:;" >末页</a></li>';
+      html += '<a index="last" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default" href="javascript:;" >末页</a>';
 
-      this.$element.html(html).find('li[index='+this.options.curPage+']').html('<span>'+this.options.curPage+'</span>').addClass('active');
+      this.$element.html(html).find('a[index='+this.options.curPage+']').html(this.options.curPage).addClass('ui-state-disabled');
 
     }
 
