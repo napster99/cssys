@@ -14,7 +14,6 @@ $(function() {
     },
 
     view : function() {
-      console.log( $('#container').highcharts)
           $('#container').highcharts({
               chart: {
                   type: 'column'
