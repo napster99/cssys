@@ -105,11 +105,66 @@ EventModel.prototype.getEventById = function(opts, callback) {
 //分页查询&条件  select * from event limit 5,2;
 EventModel.prototype.getEventsByPage = function(opts, callback) {
   // this.db.getConnection(function(err, connection) {
-    this.db.query('select * from event order by time desc',  function(err, result) {
+    delete opts['req'];
+    delete opts['res'];
+    
+    var startTime = opts['startTime'], endTime = opts['endTime'];
+    delete opts['startTime'];
+    delete opts['endTime'];
+    var conditionStr = merg(opts), sql;
+    console.log('---------------------------')
+    console.log(conditionStr)
+    console.log('---------------------------')
+    if(startTime || endTime) {
+      //带入时间的查询
+      console.log(111111111111)
+      if(startTime && !endTime) {
+        if(conditionStr) {
+          sql = 'select *, (select count(*) from event where ' + conditionStr + ' and time > "'+startTime+'" ) as count from event where ' + conditionStr + 'and time > "'+startTime+'" order by time desc limit '+opts['start'] +',' + opts['count']; 
+        }else{
+          sql = 'select *, (select count(*) from event where ' + conditionStr + ' time > "'+startTime+'" ) as count from event where ' + conditionStr + ' time > "'+startTime+'" order by time desc limit '+opts['start'] +',' + opts['count']; 
+        }
+      } else if(endTime && !startTime) {
+        if(conditionStr) {
+          sql = 'select *, (select count(*) from event where ' + conditionStr + ' and time < "'+endTime+'" ) as count from event where ' + conditionStr + 'and time < "'+endTime+'" order by time desc limit '+opts['start'] +',' + opts['count'];  
+        }else{
+          sql = 'select *, (select count(*) from event where ' + conditionStr + '  time < "'+endTime+'" ) as count from event where ' + conditionStr + ' time < "'+endTime+'" order by time desc limit '+opts['start'] +',' + opts['count'];  
+        }
+      }else{
+        if(conditionStr) {
+          sql = 'select *, (select count(*) from event where ' + conditionStr + ' and time  between "'+startTime+'" and "' + endTime + '" ) as count from event where ' + conditionStr + 'and time between "'+startTime+'" and "' + endTime + '" order by time desc limit '+opts['start'] +',' + opts['count'];
+        }else{
+          sql = 'select *, (select count(*) from event where ' + conditionStr + '  time  between "'+startTime+'" and "' + endTime + '" ) as count from event where ' + conditionStr + ' time between "'+startTime+'" and "' + endTime + '" order by time desc limit '+opts['start'] +',' + opts['count'];
+        }
+          
+      }
+
+    }else if(conditionStr){
+      console.log(222222222222)
+      sql = 'select *, (select count(*) from event where ' + conditionStr + ' ) as count from event where ' + conditionStr + ' order by time desc limit '+opts['start'] +',' + opts['count'];  
+    }else{
+      console.log(3333333333333)
+      sql = 'select *, (select count(*) from event ) as count from event order by time desc limit '+opts['start'] +',' + opts['count'] ;  
+    }
+    console.log(sql)
+    this.db.query(sql, function(err, result) {
+      console.log(err)
       console.log(result)
       callback(err, result);
     });
   // });
+
+  function merg(obj) {
+    var s = '';
+
+    var keys = Object.keys(obj);
+    for(var i=0; i<keys.length; i++) {
+      if(keys[i] == 'start' || keys[i] == 'count') continue;
+      s += keys[i] + '="' + obj[keys[i]] + '" and '
+    }
+
+    return s.substring(0, s.lastIndexOf(' and '));
+  }
 }
 
 

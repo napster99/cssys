@@ -73,7 +73,44 @@ $(function() {
 
 
     getEventsByPage : function() {
-      var param = {}, self = this;
+      var condition = {}, self = this;
+      var param = {
+        'start' : (curPage - 1)*10,
+        'count' : 10
+      }
+
+      //客服人员
+      if($('input[name=userName]').val() != '不限' && $('input[name=userName]').val().replace(/\s+/g,'') != ''  ) {
+        param['userName'] = $('input[name=userName]').val();
+      }
+
+      //开始时间
+      if($('input[name=startTime]').val() != '不限' && $('input[name=startTime]').val().replace(/\s+/g,'') != ''  ) {
+        param['startTime'] = $('input[name=startTime]').val();
+      }
+
+      //结束时间
+      if($('input[name=endTime]').val() != '不限' && $('input[name=endTime]').val().replace(/\s+/g,'') != ''  ) {
+        param['endTime'] = $('input[name=endTime]').val();
+      }
+
+      //QQ
+      if($('input[name=qq]').val() != '不限' && $('input[name=qq]').val().replace(/\s+/g,'') != ''  ) {
+        param['qq'] = $('input[name=qq]').val();
+      }
+
+      //事件分类
+      if($('#type').val() != '0') {
+        param['type'] = $('#type').val();
+      }
+
+      //游戏直播
+      if($('#gameType').val() != '0') {
+        param['gameType'] = $('#gameType').val(); 
+      }
+
+      console.log(param);
+
       $.ajax('/data/event/getEventsByPage',{'type':'GET','data' : param}).done(function(data) {
         if(data['code'] == '0') {
           self.renderData(data['data']);
