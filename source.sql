@@ -38,3 +38,6 @@ create table user
 alter table user auto_increment =  1000;
 
 desc user;
+
+
+insert into user (name,account,password,role, joinTime) values('管理员','admin','admin',2, NOW());
