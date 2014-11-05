@@ -52,7 +52,6 @@ EventModel.prototype.add = function(opts, callback) {
       , time : common.format(new Date, 'yyyy-MM-dd hh:mm:ss')
     }
     this.db.query('insert into event SET ?', data, function(err, result) {  
-      console.log(result);
       callback(err, result);
     });  
   // });
@@ -75,10 +74,9 @@ EventModel.prototype.upd = function(opts, callback) {
 //查询
 EventModel.prototype.sel = function(opts, callback) {
   // this.db.getConnection(function(err, connection) {
-    var data = 'account="'+opts['account']+'"';
-    this.db.query('select * from event where account = ? and password = ?', [opts['account'], opts['password']], function(err, result) {  
+    this.db.query('select * from event ', function(err, result) {  
       callback(err, result);
-    });  
+    });
   // });
 }
 
@@ -95,7 +93,6 @@ EventModel.prototype.accountCheck = function(opts, callback) {
 EventModel.prototype.getEventById = function(opts, callback) {
   // this.db.getConnection(function(err, connection) {
     this.db.query('select * from event where id = ?', opts['id'], function(err, result) {
-      console.log(result)
       callback(err, result);
     });  
   // });
@@ -112,12 +109,8 @@ EventModel.prototype.getEventsByPage = function(opts, callback) {
     delete opts['startTime'];
     delete opts['endTime'];
     var conditionStr = merg(opts), sql;
-    console.log('---------------------------')
-    console.log(conditionStr)
-    console.log('---------------------------')
     if(startTime || endTime) {
       //带入时间的查询
-      console.log(111111111111)
       if(startTime && !endTime) {
         if(conditionStr) {
           sql = 'select *, (select count(*) from event where ' + conditionStr + ' and time > "'+startTime+'" ) as count from event where ' + conditionStr + 'and time > "'+startTime+'" order by time desc limit '+opts['start'] +',' + opts['count']; 
@@ -140,16 +133,11 @@ EventModel.prototype.getEventsByPage = function(opts, callback) {
       }
 
     }else if(conditionStr){
-      console.log(222222222222)
       sql = 'select *, (select count(*) from event where ' + conditionStr + ' ) as count from event where ' + conditionStr + ' order by time desc limit '+opts['start'] +',' + opts['count'];  
     }else{
-      console.log(3333333333333)
       sql = 'select *, (select count(*) from event ) as count from event order by time desc limit '+opts['start'] +',' + opts['count'] ;  
     }
-    console.log(sql)
     this.db.query(sql, function(err, result) {
-      console.log(err)
-      console.log(result)
       callback(err, result);
     });
   // });

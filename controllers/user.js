@@ -11,12 +11,34 @@ var userModuleObj = new userModule();
 
 //个人设置
 exports.settings_view = function(req, res) {
-  console.log(req.session.user)
   res.render('settings',{
       'cur' : 'settings'
     , 'userName' : req.session.user['name']
     , 'userAccount' : req.session.user['account']
     , 'userPwd' : req.session.user['password']
+  });
+}
+
+
+
+//添加客服
+exports.addUser_view = function(req, res) {
+  res.render('addUser',{
+      'cur' : 'addUser'
+    , 'userName' : req.session.user['name']
+    , 'userAccount' : req.session.user['account']
+    , 'userPwd' : req.session.user['password']
+  });
+}
+
+//添加客服 提交
+exports.addUser_data = function(opts, callback) {
+  userModuleObj.add(opts, function(err, result) {
+    if(err) {
+      callback(err,{});
+    }else{
+      callback(null);
+    }
   });
 }
 
@@ -27,6 +49,22 @@ exports.accountCheck_data = function(opts, callback) {
       callback(err,{});
     }else{
       if(result.length > 0 && opts['account'] != opts['req']['session']['user']['account']) {
+        callback(true);
+      }else{
+        callback(null);
+      }
+    }
+  });
+}
+
+
+//账号验证 全新
+exports.accountCheckOther_data = function(opts, callback) {
+  userModuleObj.accountCheck(opts, function(err, result) {
+    if(err) {
+      callback(err,{});
+    }else{
+      if(result.length > 0 ) {
         callback(true);
       }else{
         callback(null);
@@ -68,7 +106,6 @@ exports.login_view = function(req, res) {
 
 //提交登录
 exports.login_data = function(opts, callback) {
-  console.log('提交登录' )
   userModuleObj.sel(opts, function(err, result) {
     if(err) {
       callback(err,{});

@@ -76,3 +76,14 @@ exports.getEventsByPage_data = function(opts, callback) {
     }
   });
 }
+
+//所有查询事件
+exports.getEvents_data = function(opts, callback) {
+  eventModuleObj.sel(opts, function(err, result) {
+    if(err) {
+      callback(err,{});
+    }else{
+      callback(null, result);
+    }
+  });
+}

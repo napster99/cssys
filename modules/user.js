@@ -38,7 +38,6 @@ UserModel.prototype.add = function(opts, callback) {
       , joinTime : common.format(new Date, 'yyyy-MM-dd hh:mm:ss')
     }
     this.db.query('insert into user SET ?', data, function(err, result) {  
-      console.log(result);
       callback(err, result);
     });  
   // });
@@ -61,10 +60,7 @@ UserModel.prototype.upd = function(opts, callback) {
 //查询
 UserModel.prototype.sel = function(opts, callback) {
   // this.db.getConnection(function(err, connection) {
-    console.log([opts['account'], opts['password']])
     this.db.query('select * from user where account = ? and password = ?', [opts['account'], opts['password']], function(err, result) {  
-      console.log('search back')
-      console.log(result)
       callback(err, result);
     });  
   // });

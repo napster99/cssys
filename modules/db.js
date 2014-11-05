@@ -41,9 +41,9 @@ var conn = mysql.createConnection({
   user:'root',
   database:'cssys',
   password:'root',
-  port:3307
+  port:3306
 });
-
+console.log(conn.connect)
 conn.connect();
 
 module.exports = conn;
