@@ -41,3 +41,26 @@ desc user;
 
 
 insert into user (name,account,password,role, joinTime) values('管理员','admin','admin',2, NOW());
+
+
+
+insert into config (value, name, which) values (1001,'主播工具问题','type');
+insert into config (value, name, which) values (1002,'用户卡顿问题','type');
+insert into config (value, name, which) values (1003,'用户黑屏问题','type');
+insert into config (value, name, which) values (1004,'其他','type');
+
+
+
+insert into config (value, name, which) values (10,'LOL','gameType');
+insert into config (value, name, which) values (11,'Dota2','gameType');
+insert into config (value, name, which) values (12,'CS','gameType');
+insert into config (value, name, which) values (13,'三国杀','gameType');
+insert into config (value, name, which) values (14,'war3','gameType');
+insert into config (value, name, which) values (15,'Dota','gameType');
+
+
+insert into config (value, name, which) values (1,'电信','network');
+insert into config (value, name, which) values (2,'联通','network');
+insert into config (value, name, which) values (3,'移动','network');
+insert into config (value, name, which) values (4,'铁通','network');
+insert into config (value, name, which) values (5,'其他','network');
