@@ -33,9 +33,9 @@ $(function() {
           }else{
             $('#addUserTip').find('span').text('添加失败，请稍后重试！').end().removeClass('hidden').addClass('alert-error');
           }
-          setTimeout(function() {
-            window.location.href = '/views/user/login';
-          },1000);
+          // setTimeout(function() {
+          //   window.location.href = '/views/user/login';
+          // },1000);
         });
 
         return false;
