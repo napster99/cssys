@@ -88,6 +88,11 @@ $(function() {
         param['userName'] = $('input[name=userName]').val();
       }
 
+      //平台账号
+      if($('input[name=platAccount]').val() != '不限' && $('input[name=platAccount]').val().replace(/\s+/g,'') != ''  ) {
+        param['platAccount'] = $('input[name=platAccount]').val();
+      }
+
       //开始时间
       if($('input[name=startTime]').val() != '不限' && $('input[name=startTime]').val().replace(/\s+/g,'') != ''  ) {
         param['startTime'] = $('input[name=startTime]').val();
@@ -117,10 +122,8 @@ $(function() {
 
       $.ajax('/data/event/getEventsByPage',{'type':'GET','data' : param}).done(function(data) {
         if(data['code'] == '0') {
-          console.log(data)
           self.renderData(data['data']);
           if(!ui.$myPage.data('pagination')) {
-            console.log('init page')
             ui.$myPage.pagination({
               onPageChange : function(cp) {
                 curPage = cp;
@@ -149,6 +152,7 @@ $(function() {
             sHtml += '<tr class="gradeA even">'
           }
           sHtml += '<td>'+data[i]['userName']+'</td>'
+          +'<td style="text-align:center">'+(data[i]['platAccount'] || '--')+'</td>'
           +'<td>'+ConfigType[data[i]['type']]+'</td>'
           +'<td>'+data[i]['eventDesc']+'</td>'
           +'<td>'+data[i]['solution']+'</td>'

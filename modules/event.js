@@ -43,6 +43,7 @@ EventModel.prototype.add = function(opts, callback) {
         userName : opts['userName']
       , type : opts['type']
       , eventDesc : opts['eventDesc']
+      , platAccount : opts['platAccount']
       , solution : opts['solution']
       , qq : opts['qq']
       , otherDesc : opts['otherDesc']
@@ -65,7 +66,7 @@ EventModel.prototype.del = function() {
 //修改 事件
 EventModel.prototype.upd = function(opts, callback) {
   // this.db.getConnection(function(err, connection) {
-    this.db.query('update event set type = ? ,  eventDesc = ? , solution = ?, qq = ?, otherDesc = ? , gameType = ? , address = ?, network = ?  where id = ?',[opts['type'], opts['eventDesc'], opts['solution'], opts['qq'], opts['otherDesc'], opts['gameType'], opts['address'], opts['network'], opts['id']], function(err, rows) {
+    this.db.query('update event set type = ? ,  eventDesc = ? , platAccount = ? , solution = ?, qq = ?, otherDesc = ? , gameType = ? , address = ?, network = ?  where id = ?',[opts['type'], opts['eventDesc'], opts['platAccount'], opts['solution'], opts['qq'], opts['otherDesc'], opts['gameType'], opts['address'], opts['network'], opts['id']], function(err, rows) {
       callback(err);
     });
   // });

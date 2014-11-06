@@ -30,6 +30,7 @@ $(function() {
         var param = {
             userName : $('input[name=userName]').val()
           , eventDesc : $('input[name=eventDesc]').val()
+          , platAccount : $('input[name=platAccount]').val()
           , solution : $('#solution').val()
           , type : $('#type').val()
           , qq : $('input[name=qq]').val()

@@ -15,6 +15,7 @@ create table event
   type int(4) , 
   eventDesc varchar(50),
   solution varchar(50),
+  platAccount varchar(50),
   qq varchar(50),
   otherDesc varchar(50),
   gameType int(4),
@@ -48,6 +49,7 @@ insert into config (value, name, which) values (1001,'主播工具问题','type'
 insert into config (value, name, which) values (1002,'用户卡顿问题','type');
 insert into config (value, name, which) values (1003,'用户黑屏问题','type');
 insert into config (value, name, which) values (1004,'其他','type');
+insert into config (value, name, which) values (1005,'运营问题','type');
 
 
 
